@@ -17,7 +17,13 @@ class WPC {
 	}
 
 	function add_meta_box() {
-		add_meta_box('wpc-meta-box', __('Primary Category', 'wpc'), array($this, 'wpc_metabox'), null, 'side', 'core');
+		$post_types = get_post_types(
+			array(
+				'_builtin' => false
+			)
+		);
+		$post_types['post'];
+		add_meta_box('wpc-meta-box', __('Primary Category', 'wpc'), array($this, 'wpc_metabox'), $post_types, 'side', 'high');
 	}
 
 	function wpc_metabox() {
